@@ -24,47 +24,87 @@ class Stack():
     def __len__(self):
         return len(self.items)
 
+while True:
+    flag = 0
+    sentence = input()
+    s = Stack()
+
+    if sentence ==".":
+        break
+
+    for ex in sentence:
+        test = ' '
+        if ex == '(':           # ( 가 들어오면
+            s.push('(')
+        elif ex == '[':         # [ 가 들어오면
+            s.push('[')
+        elif ex == ')':         # ) 가 들어오면
+            while test != '(':   # ( 가 pop될때까지
+                if s.isEmpty():
+                    flag = 1
+                    break
+                test = s.pop()
+                if test == '[':
+                   flag = 1
+                   break
+        elif ex == ']':         # ] 가 들어오면
+            while test != '[':  # [ 가 pop 될때까지
+                if s.isEmpty():
+                    flag = 1
+                    break
+                test = s.pop()
+                if test == '(':
+                    flag = 1
+                    break
+        else:
+            pass
+    if not s.isEmpty():
+        print("no")
+    elif flag == 1:
+        print("no")
+    else:
+        print("yes")
+
+"""
+#gpt가 리팩토링 해준 버전
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, val):
+        self.items.append(val)
+
+    def pop(self):
+        if self.isEmpty():
+            return None
+        return self.items.pop()
+
+    def isEmpty(self):
+        return len(self.items) == 0
 
 while True:
-    small = Stack()
-    big = Stack()
+    flag = 0
     sentence = input()
-    pop_lst= []
-    if sentence == '.':
+    if sentence == ".":
         break
+
+    s = Stack()
+
     for ch in sentence:
-        if ch == '[' :
-            big.push('[')
-            pop_lst.append('[')
-        elif ch == ']':
-            pop_lst.append(big.pop())
-
-        elif ch == '(':
-            small.push('(')
-            pop_lst.append('(')
+        if ch == '(' or ch == '[':
+            s.push(ch)
         elif ch == ')':
-            pop_lst.append(small.pop())
-        else :
-            pass
+            if s.isEmpty() or s.pop() != '(':
+                flag = 1
+                break
+        elif ch == ']':
+            if s.isEmpty() or s.pop() != '[':
+                flag = 1
+                break
 
-    if len(small) == 0 and len(big) == 0:
-        recent = pop_lst[0]
-        for i in (1,len(pop_lst)):
-            if recent == '(':
-                if pop_lst[i] == ']':
-                    print("no")
-                    break
-                else:
-                    recent = pop_lst[i]
+    if not s.isEmpty():
+        flag = 1
 
-            elif recent == '[':
-                if pop_lst[i] == ')':
-                    print("no")
-                    break
-                else:
-                    recent = pop_lst[i]
-            else:
-                recent = pop_lst[i]
-                pass
-    else:
-        print("no")
+    print("no" if flag else "yes")
+
+"""
