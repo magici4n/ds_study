@@ -15,7 +15,7 @@ class Node:
         self.next = None        #다음 노드로의 링크(초기값은 None)
     
     def __str__(self):          #print(node)인 경우 출력할 문자열
-        return str(self.key)    #str((self.key,self,value))
+        return str(self.key)    #str((self.key,self.value))
 </code>
 </pre>
 
@@ -37,7 +37,7 @@ class Node:
 <code>
 class SinglyLinkedList:
     def __init__(self):
-        self.head = None   #연결리스트 가장 앞의 노드(head), 초가값은 None
+        self.head = None   #연결리스트 가장 앞의 노드(head), 초기값은 None
         self.size = 0      #리스트의 노드 개수
     def __iter__(self):    #generator 정의 / 연결 리스트의 노드를 for문 형식으로 접근 위해
         v = self.head
@@ -257,17 +257,17 @@ def remove(self,v):
 - 장점
    1. 어떤 노드 x의 다음에 새로운 노드를 삽입하는 연산은 O(1)시간이면 가능<br>
   ->단, 노드 x를 알고 있어야 한다.
-  2. 배열의 경우 삽입할 빈 칸을 만들기 위해, 그 이후의 값들을 한 칸씩 이동해야한다.  
+    2. 배열의 경우 삽입할 빈 칸을 만들기 위해, 그 이후의 값들을 한 칸씩 이동해야한다.  
   따라서 최악의 경우 O(n)이지만 한방향 연결리스트는 O(1)
 - 단점
-1. k번째 값을 배열에서는 O(1)시간에 알 수 있지만,연결리스트에선 O(k) 시간이 필요하다.
-2. 바로 전 노드(prev 노드)로의 링크가 없어 삽입과 삭제의 시간이 많이 걸린다.(ex. popBack 연산)
+  1. k번째 값을 배열에서는 O(1)시간에 알 수 있지만,연결리스트에선 O(k) 시간이 필요하다.
+   2. 바로 전 노드(prev 노드)로의 링크가 없어 삽입과 삭제의 시간이 많이 걸린다.(ex. popBack 연산)
 
 #### 백준 문제 풀어보기
 - 초급 - 연결 리스트 구조 익히기
-1. 1406 -
-2. 5397 -
-3. 1158 -
+1. 1406 - 풀었지만 시간초과를 이유로 오답. 이중연결 리스트로 푸는게 나을듯.
+2. 5397 -  ""
+3. 1158 - baekjoon_1158 참고
 4. 14719 -
 5. 2346 -
 
